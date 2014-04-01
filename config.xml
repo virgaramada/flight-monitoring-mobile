@@ -33,7 +33,7 @@
     
     <content src="index.html" />
     <access origin="*" />
-    <icon src="img/logo_ga.png" />
-    <gap:splash src="img/logoGA.png" />
+    <icon src="img/logo_ga_b.png" />
+    <gap:splash src="img/logo_ga_b.png" />
     
 </widget>
