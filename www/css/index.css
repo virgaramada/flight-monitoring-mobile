@@ -530,3 +530,12 @@ div#war_room_msg_load {
 	}
 }
 
+img.centeredpos {
+    min-height: 10em;   
+    vertical-align: middle;
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+	
+}
+
