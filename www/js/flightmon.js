@@ -1467,6 +1467,7 @@ loadWarRoomData = function() {
 	  url: "https://flightmonitoring.firebaseio.com/data.json",
 	  //url : "flightmonitoring-data.json",
 	  dataType: "json",
+	  cache: false,
 	  success: function(data) {
 				
 			$('#plan_war_room_result_body').empty();  
