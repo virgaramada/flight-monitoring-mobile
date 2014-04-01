@@ -156,6 +156,7 @@
 	 <div id="clear"></div>
 
  </div>     <!-- End: Container Top -->
+
        <script type="text/javascript">
        $( document ).bind( "mobileinit", function() {
     	    // Make your jQuery Mobile framework configuration changes here!
@@ -166,13 +167,36 @@
     	});
        </script>
        <script type="text/javascript" src="./js/flightmon.js"></script>
-       <!-- 
+      
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+            
+            document.addEventListener("backbutton", function(e) {
+                if ( $('.ui-page-active').attr('id') == 'plan_wrap' || $.mobile.activePage.is('#plan_wrap')) {
+                	e.preventDefault();
+                	exitAppPopup();
+                } else {
+                	navigator.app.backHistory();       
+                }
+            }, false);
+            
+            function exitAppPopup() {
+                navigator.notification.confirm(
+                      'Exit Flight Monitor ?'
+                    , function(button) {
+                          if (button == 2) {
+                              navigator.app.exitApp();
+                          }
+                      }
+                    , 'Exit'
+                    , 'No,Yes'
+                );  
+                return false;
+            }
         </script>
-         -->
+        
        
     </body>
 </html>
