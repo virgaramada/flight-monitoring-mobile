@@ -35,6 +35,19 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
     },
+    exitAppPopup: function() {
+    	navigator.notification.confirm(
+    	          'Exit Flight Monitor ?', 
+    	          function(button) {
+    	              if (button == 2) {
+    	                  navigator.app.exitApp();
+    	              }
+    	          }, 
+    	          'Exit',
+    	          'No,Yes'
+    	    );  
+    	    
+    },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -45,5 +58,14 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+        
+	  	document.addEventListener("backbutton", function(e) {
+	          if ( $.mobile.activePage.is('#plan_wrap')) {
+	           	e.preventDefault();
+	          	app.exitAppPopup();
+	          } else {
+	          	navigator.app.backHistory();       
+	          }
+	    }, false);
     }
 };
