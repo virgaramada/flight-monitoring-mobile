@@ -1458,17 +1458,6 @@ Options:
 $(document).ready(function(){
       displayTime();
 	  loadWarRoomData();
-	  
-	  
-	  document.addEventListener("backbutton", function(e) {
-          if ( $.mobile.activePage.is('#plan_wrap')) {
-          	e.preventDefault();
-          	exitAppPopup();
-          } else {
-          	navigator.app.backHistory();       
-          }
-      }, false);
-      
 });
 
 loadWarRoomData = function() {
@@ -1734,16 +1723,4 @@ $('div.ui-page').live("swiperight", function(){
 	}
 });
 
-exitAppPopup = function() {
-	navigator.notification.confirm(
-	          'Exit Flight Monitor ?'
-	        , function(button) {
-	              if (button == 2) {
-	                  navigator.app.exitApp();
-	              }
-	          }
-	        , 'Exit'
-	        , 'No,Yes'
-	    );  
-	    return false;
-};
+
