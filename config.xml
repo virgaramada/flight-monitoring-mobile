@@ -10,6 +10,8 @@
     <author email="dev@asyst.co.id" href="http://www.asyst.co.id">
         Asyst Dev Team
     </author>
+    <gap:plugin name="org.apache.cordova.dialogs" version="0.2.6"/>
+    
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="permissions"                value="none"/>
 
