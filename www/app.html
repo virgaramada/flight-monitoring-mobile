@@ -9,11 +9,17 @@
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.2.0.min.css" />
         <title>Flight Monitoring</title>
         <script type="text/javascript" src="./js/jquery-1.8.2.min.js"></script>
-		<script type="text/javascript" src="./js/jquery.scrollTo-1.4.2-min.js"></script>
+        <script type="text/javascript" src="./js/jquery.scrollTo-1.4.2-min.js"></script>
 		<script type="text/javascript" src="./js/jquery.mobile-1.2.0.min.js"></script>			
 		
     </head>
     <body>
+     <div class="app" id="loading_pad">            
+            <div id="deviceready" class="blink">
+                <p class="event listening">Loading data</p>
+                <p class="event received">Data loaded</p>
+            </div>
+        </div>
     <div id="war_room_msg_load"></div>
  <div id="container_top"> <!--  Container Top -->
 	<div data-role="page" id="plan_wrap"><!-- Plan -->
@@ -165,38 +171,14 @@
     	    $.mobile.allowCrossDomainPages = true;
 
     	});
-       </script>
-       <script type="text/javascript" src="./js/flightmon.js"></script>
+       </script>      
       
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
-            
-            document.addEventListener("backbutton", function(e) {
-                if ( $('.ui-page-active').attr('id') == 'plan_wrap' || $.mobile.activePage.is('#plan_wrap')) {
-                	e.preventDefault();
-                	exitAppPopup();
-                } else {
-                	navigator.app.backHistory();       
-                }
-            }, false);
-            
-            function exitAppPopup() {
-                navigator.notification.confirm(
-                      'Exit Flight Monitor ?'
-                    , function(button) {
-                          if (button == 2) {
-                              navigator.app.exitApp();
-                          }
-                      }
-                    , 'Exit'
-                    , 'No,Yes'
-                );  
-                return false;
-            }
         </script>
-        
+         <script type="text/javascript" src="./js/flightmon.js"></script> 
        
     </body>
 </html>
