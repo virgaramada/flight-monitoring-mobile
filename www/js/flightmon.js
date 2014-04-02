@@ -1456,8 +1456,19 @@ Options:
  var actualDepTimeArray = [];
  
 $(document).ready(function(){
-	displayTime();
-	loadWarRoomData();
+      displayTime();
+	  loadWarRoomData();
+	  
+	  
+	  document.addEventListener("backbutton", function(e) {
+          if ( $.mobile.activePage.is('#plan_wrap')) {
+          	e.preventDefault();
+          	exitAppPopup();
+          } else {
+          	navigator.app.backHistory();       
+          }
+      }, false);
+      
 });
 
 loadWarRoomData = function() {
@@ -1610,6 +1621,7 @@ loadWarRoomData = function() {
 			/** OTP & PLF Gauge - End*/
 			$('#nbrDepart').html(movement);
 			$('#nbrDelay').html(delay);
+			
 		
 	  },
 	  beforeSend: function(xhr){
@@ -1617,11 +1629,17 @@ loadWarRoomData = function() {
 		    {
 		      xhr.overrideMimeType("application/json");
 		    }
-	      $('#war_room_msg_load').append("<div class=\"wing\"><div class=\"logo\"><span class=\"credits\">Loading data...</span></div></div>");
-	      $('#container_top').fadeOut("slow");
+		    
+	      //$('#war_room_msg_load').append("<div class=\"wing\"><div class=\"logo\"><span class=\"credits\">Loading data...</span></div></div>");	      
+	      
+	      $('#container_top').fadeOut('slow');
+	      $.mobile.loading('show');
+	      
 	  },
 	  complete : function() {
-		  $('#container_top').show("slow");
+		    $('#container_top').show("slow");
+		    $('#loading_pad').empty();
+		    $('#loading_pad').hide();
 		    $('#war_room_msg_load').empty();		  
 		    $('#war_room_msg_load').hide();   
 		    $('#plan_wrap_table').scrollTo(0);
@@ -1637,6 +1655,7 @@ loadWarRoomData = function() {
 		    	$('#actual_wrap_table').scrollTo($('#actualDepTime_' + actualDepTimeArray[0]), { duration:1000, axis:'y'});
 		    }
 		    $(".credits").append("&copy; 2011 Garuda Indonesia. Powered by <span class=\"asyst\"></span>");
+		    $.mobile.loading('hide');
 		    
 	  }
 	 });
@@ -1644,16 +1663,6 @@ loadWarRoomData = function() {
 };
 	
 setInterval('loadWarRoomData()', reloadTimeInMillis);
-/**
-displayLastUpdate = function(){
-	var now = new Date();
-	var lastUpdate = $.format.date(now, "MM-dd-yyyy")+'';
-	var lastUpdateTime = $.format.date(now, "HH:mm:ss")+'';
-	$("#lastUpdateTime").html(lastUpdateTime+'');
-	$("#lastUpdate").html(lastUpdate+'');
-	
-	setInterval("displayLastUpdate()", reloadTimeInMillis);
-};*/
 
 displayTime = function() {
 	var display = "<div class=\"time_right\">Local Time " + $.format.date(new Date(), "MM-dd-yyyy")
@@ -1724,3 +1733,17 @@ $('div.ui-page').live("swiperight", function(){
 			reverse: true}, true, true);
 	}
 });
+
+exitAppPopup = function() {
+	navigator.notification.confirm(
+	          'Exit Flight Monitor ?'
+	        , function(button) {
+	              if (button == 2) {
+	                  navigator.app.exitApp();
+	              }
+	          }
+	        , 'Exit'
+	        , 'No,Yes'
+	    );  
+	    return false;
+};
