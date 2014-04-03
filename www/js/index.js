@@ -33,39 +33,19 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    exitAppPopup: function() {
-    	navigator.notification.confirm(
-    	          'Exit Flight Monitor ?', 
-    	          function(button) {
-    	              if (button == 2) {
-    	                  navigator.app.exitApp();
-    	              }
-    	          }, 
-    	          'Exit',
-    	          'No,Yes'
-    	    );  
-    	    
+        app.receivedEvent('deviceready');   
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+    	
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
         
-	  	document.addEventListener("backbutton", function(e) {
-	          if ( $.mobile.activePage.is('#plan_wrap')) {
-	           	e.preventDefault();
-	          	app.exitAppPopup();
-	          } else {
-	          	navigator.app.backHistory();       
-	          }
-	    }, false);
+        console.log('Received Event: ' + id);
+        	  	 
     }
 };

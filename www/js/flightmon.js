@@ -1455,11 +1455,11 @@ Options:
  var depTimeArray = [];
  var actualDepTimeArray = [];
  
-$(document).ready(function(){
-      displayTime();
-	  loadWarRoomData();
-});
-
+ $('#plan_wrap').on('pageinit', function() {
+     displayTime();
+     loadWarRoomData();
+ });
+	
 loadWarRoomData = function() {
    
 	 $.ajax({
@@ -1467,7 +1467,7 @@ loadWarRoomData = function() {
 	  url: "https://flightmonitoring.firebaseio.com/data.json",
 	  //url : "flightmonitoring-data.json",
 	  dataType: "json",
-	  cache: false,
+	  //cache: false,
 	  success: function(data) {
 				
 			$('#plan_war_room_result_body').empty();  
@@ -1618,19 +1618,20 @@ loadWarRoomData = function() {
 		    {
 		      xhr.overrideMimeType("application/json");
 		    }
-		    
-	      //$('#war_room_msg_load').append("<div class=\"wing\"><div class=\"logo\"><span class=\"credits\">Loading data...</span></div></div>");	      
-	      
+		  $.mobile.loading("show");
 	      $('#container_top').fadeOut('slow');
-	      $.mobile.loading('show');
+	      $('#loading_pad').show('slow');
+	      $(".credits").empty();
 	      
 	  },
 	  complete : function() {
+		   
+		    $('#loading_pad').fadeOut('slow');
 		    $('#container_top').show("slow");
-		    $('#loading_pad').empty();
-		    $('#loading_pad').hide();
-		    $('#war_room_msg_load').empty();		  
-		    $('#war_room_msg_load').hide();   
+		    //$('#loading_pad').empty();
+		    //$('#loading_pad').hide();
+		  //  $('#war_room_msg_load').empty();		  
+		  //  $('#war_room_msg_load').hide();   
 		    $('#plan_wrap_table').scrollTo(0);
 		    $('#actual_wrap_table').scrollTo(0);
 		    // Reset the screen to (0,0)
@@ -1643,15 +1644,15 @@ loadWarRoomData = function() {
 		    if( actualDepTimeArray.length > 0 ) {
 		    	$('#actual_wrap_table').scrollTo($('#actualDepTime_' + actualDepTimeArray[0]), { duration:1000, axis:'y'});
 		    }
-		    $(".credits").append("&copy; 2011 Garuda Indonesia. Powered by <span class=\"asyst\"></span>");
-		    $.mobile.loading('hide');
-		    
+		    $(".credits").append("&copy; 2014 Garuda Indonesia. Powered by <span class=\"asyst\"></span>");
+		      
+		    $.mobile.loading("hide");
 	  }
 	 });
-	
+	 //setInterval('loadWarRoomData()', reloadTimeInMillis);
 };
 	
-setInterval('loadWarRoomData()', reloadTimeInMillis);
+//setInterval('loadWarRoomData()', reloadTimeInMillis);
 
 displayTime = function() {
 	var display = "<div class=\"time_right\">Local Time " + $.format.date(new Date(), "MM-dd-yyyy")
@@ -1723,4 +1724,8 @@ $('div.ui-page').live("swiperight", function(){
 	}
 });
 
-
+$( ".ui-btn-right" ).on('click', function (e) {
+   	displayTime();
+   	loadWarRoomData();
+   	
+});
