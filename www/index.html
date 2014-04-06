@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <title>Flight Monitoring</title>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.2.0.min.css" />
-        <title>Flight Monitoring</title>
+        <script type="text/javascript" src="./js/fastclick.js"></script>
         <script type="text/javascript" src="./js/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="./js/jquery.scrollTo-1.4.2-min.js"></script>
-		<script type="text/javascript" src="./js/jquery.mobile-1.2.0.min.js"></script>			
-		
     </head>
     <body>
 
@@ -189,29 +187,15 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
            app.initialize();
-           document.addEventListener("backbutton", function(e) {
-		          if ( $.mobile.activePage.is('#plan_wrap')) {
-		           	e.preventDefault();
-		           	navigator.app.exitApp();
-		          } else {
-		          	navigator.app.backHistory();       
-		          }
-		    }, false);
-        
-	        $( ".ui-btn-left" ).on('click', function (e) {
-	        	if (typeof (navigator.app) != "undefined") {
-		        	if ( $.mobile.activePage.is('#plan_wrap')) {
-		        		e.preventDefault();
-		                navigator.app.exitApp();
-		            } else {
-		            	navigator.app.backHistory();
-		            	
-		            }
-	        	}
-	        });      
-	        
       </script>
-       <script type="text/javascript" src="./js/flightmon.js"></script> 
-
+               
+      <script type="text/javascript" src="./js/jquery.mobile-1.2.0.min.js"></script>	
+      <script type="text/javascript" src="./js/jquery.scrollTo-1.4.2-min.js"></script>
+      <script type="text/javascript" src="./js/flightmon.js"></script> 
+      <script type="text/javascript">
+      window.addEventListener('load', function() {
+    	    new FastClick(document.body);
+    	}, false);
+      </script>
     </body>
 </html>
