@@ -1731,11 +1731,13 @@ $( ".ui-btn-right" ).on('click', function (e) {
 });
 
 document.addEventListener("backbutton", function(e) {
-    if ( $.mobile.activePage.is('#plan_wrap')) {
+	if (typeof (navigator.app) != "undefined") {
+    //if ( $.mobile.activePage.is('#plan_wrap')) {
      	e.preventDefault();
      	navigator.app.exitApp();
-    } else {
-    	navigator.app.backHistory();       
+    //} else {
+    	//navigator.app.backHistory();       
+    //}
     }
 }, false);
 
